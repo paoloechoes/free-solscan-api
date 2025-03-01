@@ -1,0 +1,39 @@
+[project]
+name = "free-solscan-api"
+version = "0.0.1"
+description = "Unofficial Python client for accessing the Solscan private API"
+authors = [
+    {name = "paoloechoes",email = "anzanipaolo.enquires@gmail.com"}
+]
+packages = [{include = "free_solscan_api", from = "src"}]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "requests (>=2.32.3,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+ruff = "^0.9.9"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "--verbose --color=yes"
+norecursedirs = ".venv .git"
+python_files = "test_*.py"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.format]
+quote-style = "double"
+docstring-code-format = true
+
+
+

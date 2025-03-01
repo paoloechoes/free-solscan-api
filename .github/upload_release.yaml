@@ -1,0 +1,43 @@
+name: Build and Publish on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.5.1  # Latest stable
+          virtualenvs-in-project: true
+      
+      - name: Verify version match
+        run: |
+          poetry version
+          [[ $(poetry version -s) == "${GITHUB_REF#refs/tags/v}" ]] || exit 1
+      
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+      
+      - name: Build package
+        run: poetry build
+      
+      - name: Upload wheel
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/*.whl
+          asset_name: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}.whl
+          asset_content_type: application/octet-stream
