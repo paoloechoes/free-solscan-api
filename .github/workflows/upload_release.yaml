@@ -18,7 +18,7 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 1.8.3 # Use known stable version
+          version: 2.0.1
           virtualenvs-create: true
           virtualenvs-in-project: true # Critical for path resolution
           installer-parallel: false # Disable parallel installs
