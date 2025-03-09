@@ -11,9 +11,9 @@ This project is not intended for production use as it utilizes the Solscan Websi
 
 To install the package run:
 ```bash
-pip install https://github.com/paoloechoes/free-solscan-api/releases/download/0.0.1/free_solscan_api-0.0.1-py3-none-any.whl
+pip install https://github.com/paoloechoes/free-solscan-api/releases/download/0.0.2/free_solscan_api-0.0.2-py3-none-any.whl
 # or
-poetry add https://github.com/paoloechoes/free-solscan-api/releases/download/0.0.1/free_solscan_api-0.0.1-py3-none-any.whl
+poetry add https://github.com/paoloechoes/free-solscan-api/releases/download/0.0.2/free_solscan_api-0.0.2-py3-none-any.whl
 ```
 To use the package:
 ```python

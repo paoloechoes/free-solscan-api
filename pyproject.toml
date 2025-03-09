@@ -1,6 +1,6 @@
 [project]
 name = "free-solscan-api"
-version = "0.0.1"
+version = "0.0.2"
 description = "Unofficial Python client for accessing the Solscan private API"
 authors = [
     {name = "paoloechoes",email = "anzanipaolo.enquires@gmail.com"}
