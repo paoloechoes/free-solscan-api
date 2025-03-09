@@ -3,12 +3,15 @@ import pytest
 import os
 import json
 
+
 def pretty_print_json(json_data):
     print(json.dumps(json_data, indent=4))
+
 
 def print_if_verbose(msg):
     if os.environ.get("TEST_VERBOSE", False):
         pretty_print_json(msg)
+
 
 router = free_solscan_api.Router(free_solscan_api.solscan_endpoints)
 
@@ -50,6 +53,12 @@ def test_token_holders():
 def test_transfers():
     address = "4g9dwu6iVKnX91zRF3QTE7avjQoxbj15GZ7rHeo1SyWS"
     transfers_response = router.transfers(address)
+    print_if_verbose(transfers_response)
+    assert transfers_response != ({} or [] or [{}])
+
+def test_transfers_with_filters():
+    address = "4g9dwu6iVKnX91zRF3QTE7avjQoxbj15GZ7rHeo1SyWS"
+    transfers_response = router.transfers(address, activity_type="ACTIVITY_SPL_TRANSFER", flow="in")
     print_if_verbose(transfers_response)
     assert transfers_response != ({} or [] or [{}])
 

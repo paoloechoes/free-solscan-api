@@ -23,6 +23,9 @@ def send_api_request(url, headers=None, url_params=None) -> dict:
         "Connection": "keep-alive",
     }
 
+    # Remove url paramas if they are None
+    url_params = {k: v for k, v in url_params.items() if v is not None}
+
     if headers:
         default_headers.update(headers)
 
@@ -71,6 +74,8 @@ endpoints = {
     "transfers": lambda address,
     remove_spam=True,
     exclude_amount_zero=True,
+    activity_type=None,
+    flow=None,
     page=1,
     page_size=100: send_api_request(
         f"/account/transfer",
@@ -80,6 +85,8 @@ endpoints = {
             "page": page,
             "remove_spam": str(remove_spam).lower(),
             "exclude_amount_zero": str(exclude_amount_zero).lower(),
+            "activity_type[]": str(activity_type).upper() if activity_type else None,
+            "flow": str(flow).lower() if flow else None,
         },
     ),
     "token_holders_total": lambda address: send_api_request(
