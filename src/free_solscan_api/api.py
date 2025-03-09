@@ -63,9 +63,17 @@ endpoints = {
         f"/account/transaction",
         url_params={"address": address, "page": page, "page_size": page_size},
     ),
-    "defi_activities": lambda address, page=1, page_size=100: send_api_request(
+    "defi_activities": lambda address,
+    page=1,
+    page_size=100,
+    activity_type=None: send_api_request(
         f"/account/activity/dextrading",
-        url_params={"address": address, "page": page, "page_size": page_size},
+        url_params={
+            "address": address,
+            "page": page,
+            "page_size": page_size,
+            "activity_type[]": activity_type.upper() if activity_type else None,
+        },
     ),
     "token_holders": lambda address, page=1, page_size=100: send_api_request(
         f"/token/holders",

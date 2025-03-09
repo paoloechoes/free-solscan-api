@@ -43,6 +43,15 @@ def test_defi_activities():
     assert defi_activities_response != ({} or [] or [{}])
 
 
+def test_defi_activities_with_filters():
+    address = "4g9dwu6iVKnX91zRF3QTE7avjQoxbj15GZ7rHeo1SyWS"
+    defi_activities_response = router.defi_activities(
+        address, activity_type="ACTIVITY_TOKEN_SWAP"
+    )
+    print_if_verbose(defi_activities_response)
+    assert defi_activities_response != ({} or [] or [{}])
+
+
 def test_token_holders():
     address = "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC"
     token_holders_response = router.token_holders(address)
@@ -56,9 +65,12 @@ def test_transfers():
     print_if_verbose(transfers_response)
     assert transfers_response != ({} or [] or [{}])
 
+
 def test_transfers_with_filters():
     address = "4g9dwu6iVKnX91zRF3QTE7avjQoxbj15GZ7rHeo1SyWS"
-    transfers_response = router.transfers(address, activity_type="ACTIVITY_SPL_TRANSFER", flow="in")
+    transfers_response = router.transfers(
+        address, activity_type="ACTIVITY_SPL_TRANSFER", flow="in"
+    )
     print_if_verbose(transfers_response)
     assert transfers_response != ({} or [] or [{}])
 
